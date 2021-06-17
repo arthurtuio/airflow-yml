@@ -1,0 +1,24 @@
+from datetime import datetime
+from airflow.models import DAG
+from airflow.operators.dummy_operator import DummyOperator
+from airflow.operators.python_operator import PythonOperator
+
+dag = DAG(
+    dag_id='{{ dag_id }}',
+    schedule_interval='@once',
+    start_date=datetime(2020, 1, 1)
+)
+
+with dag:
+    dummy = DummyOperator(
+        task_id='test',
+        dag=dag
+    )
+{% for n in range(num_task) %}
+    op_{{ loop.index }} = PythonOperator(
+        task_id='python_op_{{ loop.index }}',
+        dag=dag
+    )
+{% endfor %}
+
+    op_1 >> op2 >> op3
