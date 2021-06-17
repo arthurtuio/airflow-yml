@@ -1,17 +1,17 @@
-dag_name: sample-dag
+dag_name: "sample-dag"
 owner: Owner.MARKETING.name
-start_date: 2019-01-05
+start_date: "2019-01-05"
 schedule: "@daily"
 
 tasks:
-  - name: "send_data_from_bq_to_hubspot"
-  - source: "bigquery"
-  - destination: "hubspot"
-  - source_sql: """
-    select
-      email_contato as email,
-      column1 as field_1,
-      column2 as field_2
-    from `project_example.schema_example.table_example`
-    """
-  - destination_sql: False
+  name: "send_data_from_bq_to_hubspot"
+  source: "bigquery"
+  destination: "hubspot"
+  source_sql: "
+  select
+    email_contato as email,
+    column1 as field_1,
+    column2 as field_2
+  from `project_example.schema_example.table_example`
+  "
+  destination_sql: False
