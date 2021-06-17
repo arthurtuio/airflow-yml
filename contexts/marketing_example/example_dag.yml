@@ -1,34 +1,17 @@
 dag_name: sample-dag
-owner: 'data-platform'
+owner: Owner.MARKETING.name
 start_date: 2019-01-05
 schedule: "@daily"
-retries: 0
-namespace: dataanalytics
 
 tasks:
-  - name: custom-pod
-    custom:
-      image: python:3.6
-      cmds: ["python", "-c"]
-      args: ["print(1)"]
-
-  - name: base-pod
-    base:
-      repository: docker-airflow
-      workdir: sample_project
-      main_file: exec.py
-      requirements: False
-      args: ["--agg", "1", "--name", "teste"]
-
-  - name: other-pod
-    depends_on: [base-pod, custom-pod]
-    base:
-      repository: docker-airflow
-      workdir: sample_project
-      main_file: exec.py
-      requirements: False
-      args: ["--agg", "5", "--name", "NUMBER"]
-      secrets:
-      - name: NUMBER
-        secret_name: airflow-secrets
-        secret_key: GIT_SYNC_PASSWORD
+  - name: "send_data_from_bq_to_hubspot"
+  - source: "bigquery"
+  - destination: "hubspot"
+  - source_sql: """
+    select
+      email_contato as email,
+      column1 as field_1,
+      column2 as field_2
+    from `project_example.schema_example.table_example`
+    """
+  - destination_sql: False
