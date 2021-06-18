@@ -8,7 +8,7 @@ from lib.config.owner import Owner
 default_args = {
     "owner": Owner.MARKETING.name,
     "depends_on_past": False,
-    "start_date": 2021-01-05,
+    "start_date": '2021-01-05',
     "email": [Owner.MARKETING.value],
     "email_on_failure": True,
     "email_on_retry": 3,
@@ -26,5 +26,8 @@ dag = DAG(
 
 dag.doc_md = __doc__
 
+
+
+"Melhor ter outro template a depender do tipo da task"
 
 

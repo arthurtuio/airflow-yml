@@ -26,6 +26,8 @@ dag = DAG(
 
 dag.doc_md = __doc__
 
-
+{% if tasks %}
+{# Melhor ter outro template a depender do tipo da task #}
+{% endif %}
 
 
