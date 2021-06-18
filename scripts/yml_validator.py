@@ -37,7 +37,7 @@ def validate(obj_to_validate):
 
 
 if __name__ == '__main__':
-    yaml_file = open("/home/arthur/clone_airflow_yml/airflow-yml/contexts/marketing_example/example_dag.yml")
+    yaml_file = open("/contexts/marketing_example/example_send_data_from_bq_to_hubspot.yml")
     obj = yaml.load(yaml_file, Loader=yaml.FullLoader)
     # print(obj)
 

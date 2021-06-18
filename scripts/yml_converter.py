@@ -1,23 +1,54 @@
 import os
 import yaml
+
+from datetime import timedelta
 from jinja2 import Environment, FileSystemLoader
 
 
-file_dir = os.path.dirname(os.path.abspath(__file__))
-env = Environment(loader=FileSystemLoader(file_dir))
+class ConvertYamlInDag:
+    FILE_DIR = os.path.dirname(os.path.abspath(__file__))
+    yaml_file = open("/home/arthur/clone_airflow_yml/airflow-yml/contexts/marketing_example/example_send_data_from_bq_to_hubspot.yml")
+    YML_DAG_AS_DICT = yaml.load(yaml_file, Loader=yaml.FullLoader)
 
-template = env.get_template('dag.template')
+    def execute(self):
+        self.renderize_template_into_dag(
+            yml_dag=self.YML_DAG_AS_DICT,
+            filename=self._set_filename(self.YML_DAG_AS_DICT),
+            template=self._get_template()
+        )
 
-# I don't know what the configuration format but as long as you can convert to a dictionary, it can work.
-values = {}
-yaml_file = open("/home/arthur/clone_airflow_yml/airflow-yml/contexts/marketing_example/example_dag.yml")
-values = yaml.load(yaml_file, Loader=yaml.FullLoader)
+    def renderize_template_into_dag(self, yml_dag, filename, template):
+        with open(filename, 'w') as fh:
+            fh.write(template.render(
+                **self._enrich_yml_dag_with_default_values(yml_dag)
+            ))
 
-filename = os.path.join(file_dir, 'dag.py')
+    def _set_filename(self, yml_dag):
+        dag_name = yml_dag["dag_name"]
 
-with open(filename, 'w') as fh:
-    fh.write(template.render(
-        dag_id="my_dag",
-        num_task=1,
-        **values
-    ))
+        return os.path.join(
+            self.FILE_DIR,
+            '{}.py'.format(dag_name)
+        )
+
+    def _get_template(self):
+        env = Environment(loader=FileSystemLoader(self.FILE_DIR))
+
+        template = env.get_template('dag.template')
+        return template
+
+    @staticmethod
+    def _enrich_yml_dag_with_default_values(yml_dag_as_dict):
+        yml_dag_as_dict["retries"] = yml_dag_as_dict.get("retries", 3)
+        yml_dag_as_dict["retry_delay"] = yml_dag_as_dict.get("retry_delay", timedelta(minutes=5))
+        yml_dag_as_dict["depends_on_past"] = yml_dag_as_dict.get("depends_on_past", False)
+        yml_dag_as_dict["email_on_failure"] = yml_dag_as_dict.get("email_on_failure", True)
+        yml_dag_as_dict["email_on_retry"] = yml_dag_as_dict.get("retries", False)
+        yml_dag_as_dict["catchup"] = yml_dag_as_dict.get("catchup", False)
+        yml_dag_as_dict["max_active_runs"] = yml_dag_as_dict.get("max_active_runs", 1)
+
+        return yml_dag_as_dict
+
+
+if __name__ == '__main__':
+    ConvertYamlInDag().execute()

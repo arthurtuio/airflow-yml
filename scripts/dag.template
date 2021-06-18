@@ -1,24 +1,31 @@
-from datetime import datetime
-from airflow.models import DAG
-from airflow.operators.dummy_operator import DummyOperator
-from airflow.operators.python_operator import PythonOperator
+from datetime import timedelta, datetime
+
+from airflow import DAG
+
+from lib.config.owner import Owner
+
+
+default_args = {
+    "owner": Owner.{{ owner }}.name,
+    "depends_on_past": {{ depends_on_past }},
+    "start_date": '{{ start_date }}',
+    "email": [Owner.{{ owner }}.value],
+    "email_on_failure": {{ email_on_failure }},
+    "email_on_retry": {{ email_on_retry }},
+    "retries": {{ retries }},
+    "retry_delay": {{ retry_delay }},
+}
 
 dag = DAG(
-    dag_id='{{ dag_id }}',
-    schedule_interval='@once',
-    start_date=datetime(2020, 1, 1)
+    dag_id='{{ dag_name }}',
+    catchup={{ catchup }},
+    default_args=default_args,
+    max_active_runs={{ max_active_runs }},
+    schedule_interval='{{ schedule }}',
 )
 
-with dag:
-    dummy = DummyOperator(
-        task_id='test',
-        dag=dag
-    )
-{% for n in range(num_task) %}
-    op_{{ loop.index }} = PythonOperator(
-        task_id='python_op_{{ loop.index }}',
-        dag=dag
-    )
-{% endfor %}
+dag.doc_md = __doc__
 
-    op_1 >> op2 >> op3
+
+
+
