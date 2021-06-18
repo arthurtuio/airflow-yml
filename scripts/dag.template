@@ -27,7 +27,11 @@ dag = DAG(
 dag.doc_md = __doc__
 
 {% if tasks %}
-{# Melhor ter outro template a depender do tipo da task #}
-{% endif %}
+"Melhor ter outro template a depender do tipo da task"
 
+{% endif -%}
+
+
+{% import "teste_macro.html" as idioms %}
+{{ idioms.my_macro('aaa') }}
 

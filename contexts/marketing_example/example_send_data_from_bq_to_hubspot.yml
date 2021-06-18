@@ -4,7 +4,7 @@ start_date: "2021-01-05"
 schedule: "@daily"
 
 tasks:
-  name: "example_task_send_data_from_bq_to_hubspot"
+  name: example_task_send_data_from_bq_to_hubspot
   source: "bigquery"
   destination: "hubspot"
   source_sql: "

@@ -3,6 +3,7 @@ import yaml
 
 from datetime import timedelta
 from jinja2 import Environment, FileSystemLoader
+# from get_task_strategy import MapTaskStrategy
 
 
 class ConvertYamlInDag:
@@ -11,11 +12,17 @@ class ConvertYamlInDag:
     YML_DAG_AS_DICT = yaml.load(yaml_file, Loader=yaml.FullLoader)
 
     def execute(self):
+        self._get_task_strategy()
+
         self.renderize_template_into_dag(
             yml_dag=self.YML_DAG_AS_DICT,
             filename=self._set_filename(self.YML_DAG_AS_DICT),
             template=self._get_template()
         )
+
+    def _get_task_strategy(self):
+        # MapTaskStrategy(self.YML_DAG_AS_DICT)
+        print(123)
 
     def renderize_template_into_dag(self, yml_dag, filename, template):
         with open(filename, 'w') as fh:
@@ -33,6 +40,7 @@ class ConvertYamlInDag:
 
     def _get_template(self):
         env = Environment(loader=FileSystemLoader(self.FILE_DIR))
+        # print(env)
 
         template = env.get_template('dag.template')
         return template

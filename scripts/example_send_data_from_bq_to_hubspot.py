@@ -27,7 +27,15 @@ dag = DAG(
 dag.doc_md = __doc__
 
 
-
 "Melhor ter outro template a depender do tipo da task"
 
 
+aaa  = BigqueryToHubspot(
+    task_id="name",
+    bigquery_conn_id="gcp_airflow@contaazul-jarvis",
+    bigquery_sql=aaa,
+    hubspot_conn_id="http_hubspot_acc",
+    throw_exception_on_invalid_email=False,
+    depends_on_past=False,
+    dag=dag,
+)
