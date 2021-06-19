@@ -1,7 +1,8 @@
+from airflow import DAG
 from datetime import timedelta, datetime
 
-from airflow import DAG
 
+from lib.operators.bigquery_to_hubspot import BigQueryToHubspot
 from lib.config.owner import Owner
 
 
@@ -27,15 +28,15 @@ dag = DAG(
 dag.doc_md = __doc__
 
 
-"Melhor ter outro template a depender do tipo da task"
 
 
-aaa  = BigqueryToHubspot(
-    task_id="name",
+example_task_send_data_from_bq_to_hubspot = BigQueryToHubspot(
+    task_id="example_task_send_data_from_bq_to_hubspot",
     bigquery_conn_id="gcp_airflow@contaazul-jarvis",
-    bigquery_sql=aaa,
+    bigquery_sql=" select email_contato as email, column1 as field_1, column2 as field_2 from `project_example.schema_example.table_example` ",
     hubspot_conn_id="http_hubspot_acc",
     throw_exception_on_invalid_email=False,
     depends_on_past=False,
     dag=dag,
 )
+

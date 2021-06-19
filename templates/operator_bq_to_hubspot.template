@@ -1,8 +1,8 @@
-{% macro my_macro(name) -%}
-    {{ name }}  = BigqueryToHubspot(
-    task_id="name",
+{% macro task(name, operator_class, source_sql) -%}
+    {{ name }} = {{ operator_class }}(
+    task_id="{{ name }}",
     bigquery_conn_id="gcp_airflow@contaazul-jarvis",
-    bigquery_sql=aaa,
+    bigquery_sql="{{ source_sql }}",
     hubspot_conn_id="http_hubspot_acc",
     throw_exception_on_invalid_email=False,
     depends_on_past=False,

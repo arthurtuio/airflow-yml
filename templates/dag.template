@@ -1,6 +1,9 @@
+from airflow import DAG
 from datetime import timedelta, datetime
 
-from airflow import DAG
+{% if tasks %}
+from lib.operators.{{ tasks.operator }} import {{ tasks.operator_class }}
+{% endif -%}
 
 from lib.config.owner import Owner
 
@@ -27,11 +30,8 @@ dag = DAG(
 dag.doc_md = __doc__
 
 {% if tasks %}
-"Melhor ter outro template a depender do tipo da task"
+
+{% import "operator_bq_to_hubspot.template" as bq_to_hubspot %}
+{{ bq_to_hubspot.task(tasks.name, tasks.operator_class, tasks.source_sql) }}
 
 {% endif -%}
-
-
-{% import "teste_macro.html" as idioms %}
-{{ idioms.my_macro('aaa') }}
-
