@@ -30,6 +30,7 @@ dag.doc_md = __doc__
 
 
 
+
 example_task_send_data_from_bq_to_hubspot = BigQueryToHubspot(
     task_id="example_task_send_data_from_bq_to_hubspot",
     bigquery_conn_id="gcp_airflow@contaazul-jarvis",

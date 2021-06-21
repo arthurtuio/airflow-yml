@@ -15,19 +15,22 @@ Na hora de criação da Task, é preciso que sejam preenchidos os seguintes camp
 obrigatórios:
 - tasks:
     - **name**: "send_data_from_bq_to_hubspot"
-    - **source**: "bigquery"
-    - **destination**: "hubspot"
+    - **operator**: "bigquery_to_hubspot" # Conferir os Operators existentes aqui: 
+      << criar doc ou referenciar pasta operators do repo >>
+      
+    - **source** e **destination**: (Na vdd nao sei se vamos precisar)
     
 Além destes, há campos que precisam ser preenchidos, a depender
-do valor usado em **source** e **destination**.
+do valor usado em **operator**
 
-Para ver a lista completa de possibilidades, acesse a documentação: <<link>>
+Para ver a lista completa de possibilidades, acesse a documentação: <<criar a doc>>
 
 Como exemplo, temos:
 - tasks:
     - **name**: "send_data_from_bq_to_hubspot"
     - **source**: "bigquery"
     - **destination**: "hubspot"
+    - **operator**: "bigquery_to_hubspot"
     - **source_sql**: 
         ```` 
         """

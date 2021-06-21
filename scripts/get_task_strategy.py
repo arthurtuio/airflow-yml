@@ -1,5 +1,8 @@
 """
-Código inutilizado
+Código não utilizado. Talvez seja interessante caso tenhamos diversos tipos de tasks e fique
+complexo apenas criar templates de task.
+
+Por enquanto, a solucao pensada envolve a criação de templates de task
 """
 
 def task_strategy_dict():

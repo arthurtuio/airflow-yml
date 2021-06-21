@@ -31,6 +31,7 @@ dag.doc_md = __doc__
 
 {% if tasks %}
 
+{# precisa de uma regra de validação aqui para selecao do Operator #}
 {% import "operator_bq_to_hubspot.template" as bq_to_hubspot %}
 {{ bq_to_hubspot.task(tasks.name, tasks.operator_class, tasks.source_sql) }}
 

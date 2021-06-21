@@ -1,3 +1,7 @@
+"""
+Código inutilizado
+"""
+
 
 def operator_mapping():
     return {
