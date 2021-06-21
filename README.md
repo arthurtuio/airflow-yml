@@ -21,7 +21,9 @@ Dentro dessa pasta há um README explicando os padrões de criação dos YAMLs
     - `yml_validator.py`: Validador de scripts YAMLs. Idealmente faz parte do CI, rodando sempre que um PR é aberto
     - `yml_converter.py`: Responsável por criar DAGs a partir do YAML
     - `send_dag_to_prod.py`: Responsável por enviar as DAGs para o local de produção delas, seja a pasta `dags/`,
-nesse ou em outro repo.
+nesse ou em outro repo. **Ainda não foi criado**
+      
+- `templates/`: Pasta onde ficam os arquivos `.template`, que são as bases para o Jinja2 criar as DAGs
     
 - `dags/`: Pasta padrão do airflow, pode ficar nesse repositório ou em outro, ou até em outra branch. 
 
