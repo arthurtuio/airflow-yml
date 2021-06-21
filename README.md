@@ -2,7 +2,7 @@
 
 ### Arquitetura do Repo:
 - Pastas por contexto de negócio (ex: Marketing, Analytics, HR, etc), dentro da pasta `contexts/`;
-  - Dentro de cada pasta, temos os YAMLs com as regras da criação da DAG, sendo 1 YAML = 1 DAG
+  - Dentro de cada pasta, temos os YAMLs com as regras da criação da DAG, sendo 1 YAML = 1 DAG;
 - Pasta com os scripts de criação de DAGs, tanto de validação quanto criação de DAGs;
 - Pasta de templates, uma vez que possuímos diversos operators, gerando a necessidade de diversos templates
 
@@ -27,7 +27,13 @@ nesse ou em outro repo. **Ainda não foi criado**
     
 - `dags/`: Pasta padrão do airflow, pode ficar nesse repositório ou em outro, ou até em outra branch. 
 
-References:
+#### Sobre os testes
+- A ideia é que o repo tenha algo sobre CI, principalmente pra rodar o codigo de validação feito em
+`cerberus`, pra ver se a DAG criada em YAML está correta.
+  - Por enquanto a ideia é usar o `github actions`, de acordo com esses tutoriais:
+    1. https://www.freecodecamp.org/news/what-are-github-actions-and-how-can-you-automate-tests-and-slack-notifications/
+
+### References:
   - https://medium.com/tech-grupozap/airflow-com-dags-em-yaml-dags-e-kubernetes-operator-d049865bb453
   - https://towardsdatascience.com/data-engineers-shouldnt-write-airflow-dags-part-2-8dee642493fb
   - https://stackoverflow.com/questions/66323798/reading-a-yaml-configuration-file-and-creating-a-dag-generator-in-airflow-2-0
