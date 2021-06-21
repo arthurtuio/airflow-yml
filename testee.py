@@ -16,4 +16,3 @@ default_args = {
     "retries": 3,
     "retry_delay": timedelta(minutes=5),
 }
-
