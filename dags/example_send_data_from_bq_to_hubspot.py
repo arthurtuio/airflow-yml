@@ -9,7 +9,7 @@ from lib.config.owner import Owner
 default_args = {
     "owner": Owner.MARKETING.name,
     "depends_on_past": False,
-    "start_date": '2021-01-05',
+    "start_date": "2021-01-05",
     "email": [Owner.MARKETING.value],
     "email_on_failure": True,
     "email_on_retry": 3,
@@ -18,17 +18,14 @@ default_args = {
 }
 
 dag = DAG(
-    dag_id='example_send_data_from_bq_to_hubspot',
+    dag_id="example_send_data_from_bq_to_hubspot",
     catchup=False,
     default_args=default_args,
     max_active_runs=1,
-    schedule_interval='@daily',
+    schedule_interval="@daily",
 )
 
 dag.doc_md = __doc__
-
-
-
 
 
 example_task_send_data_from_bq_to_hubspot = BigQueryToHubspot(
@@ -40,4 +37,3 @@ example_task_send_data_from_bq_to_hubspot = BigQueryToHubspot(
     depends_on_past=False,
     dag=dag,
 )
-
