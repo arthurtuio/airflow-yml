@@ -2,7 +2,7 @@
 
 ### Arquitetura do Repo:
 - Pastas por contexto de negócio (ex: Marketing, Analytics, HR, etc), dentro da pasta `contexts/`;
-  - Dentro de cada pasta, temos os YAMLs com as regras da criação da DAG, sendo 1 YAML = 1 DAG
+  - Dentro de cada pasta, temos os YAMLs com as regras da criação da DAG, sendo 1 YAML = 1 DAG;
 - Pasta com os scripts de criação de DAGs, tanto de validação quanto criação de DAGs;
 - Pasta de templates, uma vez que possuímos diversos operators, gerando a necessidade de diversos templates
 
