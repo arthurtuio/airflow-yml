@@ -16,3 +16,4 @@ tasks:
   from `project_example.schema_example.table_example`
   "
   destination_sql: False
+
