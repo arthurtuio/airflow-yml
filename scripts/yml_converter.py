@@ -10,9 +10,10 @@ from operator_mapping import operator_mapping
 
 class ConvertYamlInDag:
     FILE_DIR = os.path.dirname(os.path.abspath(__file__))
-    DAGS_DIR = "/home/arthur/clone_airflow_yml/airflow-yml/dags"
-    TEMPLATES_DIR = "/home/arthur/clone_airflow_yml/airflow-yml/templates"
-    yaml_file = open("/home/arthur/clone_airflow_yml/airflow-yml/contexts/marketing_example/example_send_data_from_bq_to_hubspot.yml")
+    BASE_REPO_DIR = os.path.normpath(os.getcwd() + os.sep + os.pardir)
+    DAGS_DIR = BASE_REPO_DIR + "/dags"
+    TEMPLATES_DIR = BASE_REPO_DIR + "/templates"
+    yaml_file = open(BASE_REPO_DIR + "/contexts/marketing_example/example_send_data_from_bq_to_hubspot.yml")
     YML_DAG_AS_DICT = yaml.load(yaml_file, Loader=yaml.FullLoader)
 
     def execute(self):
