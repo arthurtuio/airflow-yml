@@ -51,7 +51,7 @@ class ConvertYamlInDag:
     @staticmethod
     def _enrich_yml_dag_with_default_values(yml_dag_as_dict):
         yml_dag_as_dict["retries"] = yml_dag_as_dict.get("retries", 3)
-        yml_dag_as_dict["retry_delay"] = yml_dag_as_dict.get("retry_delay", timedelta(minutes=5))
+        yml_dag_as_dict["retry_delay"] = yml_dag_as_dict.get("retry_delay", "minutes=5")
         yml_dag_as_dict["depends_on_past"] = yml_dag_as_dict.get("depends_on_past", False)
         yml_dag_as_dict["email_on_failure"] = yml_dag_as_dict.get("email_on_failure", True)
         yml_dag_as_dict["email_on_retry"] = yml_dag_as_dict.get("retries", False)

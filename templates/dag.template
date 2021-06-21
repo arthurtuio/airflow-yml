@@ -16,7 +16,7 @@ default_args = {
     "email_on_failure": {{ email_on_failure }},
     "email_on_retry": {{ email_on_retry }},
     "retries": {{ retries }},
-    "retry_delay": {{ retry_delay }},
+    "retry_delay": timedelta({{ retry_delay }}),
 }
 
 dag = DAG(

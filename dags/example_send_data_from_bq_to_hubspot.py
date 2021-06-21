@@ -14,7 +14,7 @@ default_args = {
     "email_on_failure": True,
     "email_on_retry": 3,
     "retries": 3,
-    "retry_delay": 0:05:00,
+    "retry_delay": timedelta(minutes=5),
 }
 
 dag = DAG(
