@@ -2,7 +2,7 @@
 
 ## Campos obrigatorios
 Para entender como preencher cada campo, confira esta doc do confluence:
-https://contaazul.atlassian.net/wiki/spaces/TTI/pages/edit-v2/2030568198
+https://contaazul.atlassian.net/wiki/spaces/TTI/pages/2030568198/Como+criar+uma+integra+o+no+Airflow
 
 ### Campos presentes em todas as DAGs, com exemplos
 - **dag_name**: 
