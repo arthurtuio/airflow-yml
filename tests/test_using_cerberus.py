@@ -21,15 +21,23 @@ def get_all_contexts():
     return files_list
 
 
-def test_validation_using_pytest():
-    for yaml_file in get_all_contexts():
-        obj = yaml.load(open(yaml_file), Loader=yaml.FullLoader)
-        print(obj)
-        print(type(obj))
+def transform_contexts_in_yamls():
+    return [
+        yaml.load(open(yaml_file), Loader=yaml.FullLoader)
+        for yaml_file in  get_all_contexts()
+    ]
 
-        assert validate(obj) == True
+
+def validate_all_yaml_contexts():
+    return [validate(yaml_context) for yaml_context in transform_contexts_in_yamls()]
+
+
+def test_validation_using_pytest():
+    assert any(validate_all_yaml_contexts()) == True
 
 
 if __name__ == '__main__':
     get_all_contexts()
+    # print(transform_contexts_in_yamls())
+    # print(validate_all_yaml_contexts())
     test_validation_using_pytest()
