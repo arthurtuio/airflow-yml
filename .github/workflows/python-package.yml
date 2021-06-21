@@ -5,8 +5,10 @@ name: Python package
 
 on:
   push:
+    paths: [ contexts ]
     branches: [ master ]
   pull_request:
+    paths: [ contexts ]
     branches: [ master ]
 
 jobs:
