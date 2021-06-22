@@ -4,8 +4,8 @@ import yaml
 from yml_validator import validate
 
 
-BASE_REPO_DIR = os.path.normpath(os.getcwd() + os.sep + os.pardir)
-CONTEXTS_DIR = BASE_REPO_DIR + "/contexts"
+HOME_FOLDER = os.getcwd() + '/'
+CONTEXTS_DIR = HOME_FOLDER + 'contexts/'
 
 
 def get_all_contexts():
@@ -13,21 +13,26 @@ def get_all_contexts():
     parece que o pytest nao consegue usar o os pra ler arquivos
     :return:
     """
+    # print(f'home_folder: {HOME_FOLDER}')
+    # print(f'contexts_dir: {CONTEXTS_DIR}')
+
     files_list = []
-    print(f'BASE_REPO_DIR: {BASE_REPO_DIR}')
-    # print(f'os.walk(CONTEXTS_DIR): {os.walk(CONTEXTS_DIR)}')
 
-    for subdir, dirs, files in os.walk(CONTEXTS_DIR):
-        print(f'subdir, dirs, files: {(subdir, dirs, files)}')
-        for file in files:
-            print(f'file: {file}')
-            print(os.path.join(subdir, file))
-            if not file.endswith(".md"):
-                files_list.append(os.path.join(subdir, file))
+    for filename in os.listdir(CONTEXTS_DIR):
+        # print(f'filename: {filename}')
+        # print(f'filename com a pasta: {CONTEXTS_DIR + filename}')
+        if os.path.isdir(CONTEXTS_DIR + filename):
+            dir = CONTEXTS_DIR + filename
 
-    # print(f"files_list: {files_list}")
+            for file in os.listdir(dir):
+                # print(f'file dentro do dir: {file}')
+                # print(f"file dentro do dir com a pasta: {dir + '/' + file}")
+                file_in_folder = dir + '/' + file
+                files_list.append(file_in_folder)
+
+    print(f'files_list: {files_list}')
+
     return files_list
-    # return ["/home/arthur/clone_airflow_yml/airflow-yml/contexts/marketing_example/example_send_data_from_bq_to_hubspot.yml"]
 
 
 def transform_contexts_in_yamls():
