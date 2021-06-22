@@ -24,7 +24,7 @@ def get_all_contexts():
 def transform_contexts_in_yamls():
     return [
         yaml.load(open(yaml_file), Loader=yaml.FullLoader)
-        for yaml_file in  get_all_contexts()
+        for yaml_file in get_all_contexts()
     ]
 
 
@@ -33,11 +33,12 @@ def validate_all_yaml_contexts():
 
 
 def test_validation_using_pytest():
-    assert any(validate_all_yaml_contexts()) == True
+    print(f"resultado do all: {any(validate_all_yaml_contexts())}")
+    assert all(validate_all_yaml_contexts()) == True
 
 
 if __name__ == '__main__':
-    get_all_contexts()
-    # print(transform_contexts_in_yamls())
-    # print(validate_all_yaml_contexts())
+    print(get_all_contexts())
+    print(transform_contexts_in_yamls())
+    print(validate_all_yaml_contexts())
     test_validation_using_pytest()

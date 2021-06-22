@@ -5,9 +5,9 @@ schedule: "@daily"
 
 tasks:
   name: example_task_send_data_from_bq_to_hubspot
-  source: "bigquery"
-  destination: "hubspot"
   operator: "bigquery_to_hubspot"
+#  source: "bigquery"
+#  destination: "hubspot"
   source_sql: "
   select
     email_contato as email,
@@ -15,4 +15,4 @@ tasks:
     column2 as field_2
   from `project_example.schema_example.table_example`
   "
-  destination_sql: False
+#  destination_sql: False
