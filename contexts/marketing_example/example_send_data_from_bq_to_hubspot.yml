@@ -15,4 +15,4 @@ tasks:
     column2 as field_2
   from `project_example.schema_example.table_example`
   "
-#  destination_sql: False
+  destination_sql: False
