@@ -17,10 +17,11 @@ def task_params_base():
             'type': 'dict',
             'schema': {
                 'name': {'type': 'string'},
-                'source': {'type': 'string'},
-                'destination': {'type': 'string'},
+                'operator': {'type': 'string'},
+                # 'destination': {'type: string'},
+                # 'source': {'type': 'string'},
                 'source_sql': {'type': 'string'},
-                'destination_sql': {'type': 'boolean'},
+                # 'destination_sql': {'type': 'boolean'},
             }
         }
     }
@@ -37,8 +38,9 @@ def validate(obj_to_validate):
 
 
 if __name__ == '__main__':
-    yaml_file = open("/contexts/marketing_example/example_send_data_from_bq_to_hubspot.yml")
+    yaml_file = open("/home/arthur/clone_airflow_yml/airflow-yml/contexts/marketing_example/example_send_data_from_bq_to_hubspot.yml")
     obj = yaml.load(yaml_file, Loader=yaml.FullLoader)
-    # print(obj)
+
+    #print(obj)
 
     print(validate(obj))
